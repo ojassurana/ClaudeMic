@@ -13,9 +13,11 @@ Voice-to-text plugin for [Claude Code](https://docs.anthropic.com/en/docs/claude
 
 ```bash
 git clone https://github.com/ojassurana/ClaudeMic.git
+cd ClaudeMic
+pip install -r requirements.txt
 ```
 
-That's it. Dependencies are installed automatically on first launch.
+You can use any package manager you prefer (`uv`, `conda`, etc.) — just make sure the dependencies in `requirements.txt` are installed in the Python environment that `python3` resolves to.
 
 ## Usage
 
@@ -71,12 +73,11 @@ Your terminal app (Terminal, iTerm, Warp, etc.) needs **Microphone** access:
 ClaudeMic runs as an MCP server over stdio. Claude Code manages the server lifecycle automatically — no background daemons or hotkeys involved.
 
 1. Claude Code starts the MCP server via `scripts/run-server.sh`
-2. On first run, the script creates a `.venv` and installs dependencies
-3. When you ask Claude to listen, it calls the `listen` tool
-4. The tool captures audio from your mic using `sounddevice`
-5. Voice activity detection (VAD) detects when you stop speaking
-6. The audio is sent to OpenAI Whisper for transcription
-7. Transcribed text is returned directly to Claude
+2. When you ask Claude to listen, it calls the `listen` tool
+3. The tool captures audio from your mic using `sounddevice`
+4. Voice activity detection (VAD) detects when you stop speaking
+5. The audio is sent to OpenAI Whisper for transcription
+6. Transcribed text is returned directly to Claude
 
 ## Troubleshooting
 
@@ -86,8 +87,4 @@ ClaudeMic runs as an MCP server over stdio. Claude Code manages the server lifec
 
 **"API key not configured"** — Tell Claude "set up my mic with API key sk-..." or export `OPENAI_API_KEY`.
 
-**Rebuild the venv** — If dependencies get corrupted, delete `.venv` and relaunch:
-```bash
-rm -rf /path/to/ClaudeMic/.venv
-claude --plugin-dir /path/to/ClaudeMic
-```
+**"ModuleNotFoundError"** — Dependencies are missing. Run `pip install -r requirements.txt` from the ClaudeMic directory.

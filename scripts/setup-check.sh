@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# SessionStart hook: verify python3 is available for venv bootstrap.
+# SessionStart hook: verify python3 is available.
 
 set -euo pipefail
 
