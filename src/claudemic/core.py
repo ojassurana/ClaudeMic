@@ -4,6 +4,8 @@ import enum
 import logging
 import queue
 import signal
+import subprocess
+import sys
 import threading
 import time
 
@@ -16,6 +18,45 @@ from .transcriber import Transcriber
 from .typer import type_text
 
 logger = logging.getLogger(__name__)
+
+
+def _ensure_accessibility() -> bool:
+    """Check accessibility permission, prompting the user if not granted.
+
+    Uses the macOS ApplicationServices framework via pyobjc to call
+    AXIsProcessTrustedWithOptions with the prompt flag, which triggers
+    the system permission dialog automatically.
+
+    Returns True if trusted, False otherwise.
+    """
+    try:
+        import objc
+        from ApplicationServices import AXIsProcessTrustedWithOptions
+        from CoreFoundation import (
+            CFDictionaryCreate,
+            kCFAllocatorDefault,
+            kCFBooleanTrue,
+        )
+
+        # kAXTrustedCheckOptionPrompt key
+        key = "AXTrustedCheckOptionPrompt"
+        options = CFDictionaryCreate(
+            kCFAllocatorDefault,
+            [key],
+            [kCFBooleanTrue],
+            1,
+            None,
+            None,
+        )
+        trusted = AXIsProcessTrustedWithOptions(options)
+        return bool(trusted)
+    except ImportError:
+        # pyobjc not available — fall back to tccutil-style check
+        logger.warning(
+            "pyobjc not available; cannot prompt for Accessibility permission. "
+            "Please grant access manually in System Settings > Privacy & Security > Accessibility."
+        )
+        return True  # optimistically continue
 
 
 class State(enum.Enum):
@@ -50,6 +91,19 @@ class Core:
     def run(self) -> None:
         """Start the main loop. Blocks until shutdown."""
         logger.info("ClaudeMic core starting")
+
+        # Check (and prompt for) Accessibility permission
+        if not _ensure_accessibility():
+            logger.warning(
+                "Accessibility permission not granted. "
+                "Hotkey detection may not work until permission is approved. "
+                "Check System Settings > Privacy & Security > Accessibility."
+            )
+            notify(
+                "ClaudeMic",
+                "⚠ Accessibility permission needed — check System Settings",
+            )
+
         self._transcriber = Transcriber()
 
         # Register signal handlers for clean shutdown
