@@ -1,7 +1,7 @@
 {
   "mcpServers": {
     "claudemic": {
-      "command": "python3",
+      "command": "/opt/anaconda3/bin/python3",
       "args": ["-m", "claudemic.server"],
       "cwd": "${CLAUDE_PLUGIN_ROOT}",
       "env": { "PYTHONPATH": "${CLAUDE_PLUGIN_ROOT}/src" }
