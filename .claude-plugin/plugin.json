@@ -1,0 +1,5 @@
+{
+  "name": "claudemic",
+  "version": "0.1.0",
+  "description": "Voice-to-text input for Claude Code via hotkey + OpenAI Whisper"
+}

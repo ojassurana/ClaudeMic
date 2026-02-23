@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "Bash(git:*)",
+      "Bash(python3 --version && pip3 --version 2>/dev/null)",
+      "Bash(python3:*)",
+      "Bash(head:*)",
+      "WebFetch(domain:platform.openai.com)",
+      "WebFetch(domain:python-sounddevice.readthedocs.io)",
+      "WebFetch(domain:github.com)",
+      "Bash(chmod +x:*)",
+      "Bash(python:*)",
+      "Bash(pip install:*)",
+      "Bash(claudemic:*)"
+    ]
+  }
+}
