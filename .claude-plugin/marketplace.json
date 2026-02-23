@@ -1,0 +1,27 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "claudemic",
+  "owner": {
+    "name": "ojassurana"
+  },
+  "metadata": {
+    "description": "Voice-to-text plugin marketplace for Claude Code"
+  },
+  "plugins": [
+    {
+      "name": "claudemic",
+      "source": {
+        "source": "github",
+        "repo": "ojassurana/ClaudeMic"
+      },
+      "description": "Voice-to-text MCP plugin for Claude Code using OpenAI Whisper",
+      "version": "0.2.0",
+      "author": {
+        "name": "ojassurana"
+      },
+      "repository": "https://github.com/ojassurana/ClaudeMic",
+      "keywords": ["voice", "microphone", "whisper", "transcription", "speech-to-text"],
+      "category": "productivity"
+    }
+  ]
+}
