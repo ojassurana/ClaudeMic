@@ -17,7 +17,7 @@ class Transcriber:
         api_key = get_api_key()
         if not api_key:
             raise RuntimeError(
-                "OpenAI API key not configured. Run 'claudemic setup' first."
+                "OpenAI API key not configured. Use the 'setup' tool or set OPENAI_API_KEY."
             )
         self._client = OpenAI(api_key=api_key)
 

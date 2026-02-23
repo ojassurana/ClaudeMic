@@ -1,5 +1,5 @@
 {
   "name": "claudemic",
-  "version": "0.1.0",
-  "description": "Voice-to-text input for Claude Code via hotkey + OpenAI Whisper"
+  "version": "0.2.0",
+  "description": "Voice-to-text MCP plugin for Claude Code using OpenAI Whisper"
 }

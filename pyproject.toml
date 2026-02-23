@@ -4,20 +4,16 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "claudemic"
-version = "0.1.0"
-description = "Voice-to-text input for Claude Code via hotkey + OpenAI Whisper"
+version = "0.2.0"
+description = "Voice-to-text MCP plugin for Claude Code using OpenAI Whisper"
 requires-python = ">=3.10"
 dependencies = [
-    "click>=8.0",
-    "pynput>=1.7",
+    "mcp>=1.0",
     "sounddevice>=0.4",
     "numpy>=1.24",
     "scipy>=1.10",
     "openai>=1.0",
 ]
-
-[project.scripts]
-claudemic = "claudemic.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
